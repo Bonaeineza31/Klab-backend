@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(bodyParser,json());
+// app.use(bodyParser,json());
 app.use('/', mainRouter);
 
 const dbUri = `mongodb+srv://${db_user}:${encodeURIComponent(db_pass)}@cluster0.qfmve.mongodb.net/${db_name}?retryWrites=true&w=majority&appName=Cluster0`
