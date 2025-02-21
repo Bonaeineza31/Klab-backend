@@ -21,3 +21,69 @@ export const CreateContact = async(req, res)=>{
 
 }
 }
+
+export const getAllContact=async (req,res)=>{
+
+    try{
+          const contacts=await Contact.find();
+          res.status(200).json({sucess:true,contacts})
+        }
+        catch(error)
+    {
+        res.status(500).json({success:false, message:'Server Error', error: error.message});
+    }
+}
+
+
+export const getContactById=async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const contacts=await Contact.findById(id)
+    if(!contacts){
+        res.status(404).json({sucess:false,contacts,essage:'Contact not found'})
+    }
+    res.status(200).json({sucess:true,contacts})
+       }
+
+        catch(error)
+    {
+        res.status(500).json({success:false, message:'Server Error', error: error.message});
+    }
+    
+}
+
+
+
+
+export const deleteContactById =async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const contacts=await Contact.findByIdAndDelete(id);
+        if(!contacts){
+            return res.status(404).json({sucess:false,contacts, message:'Didnt delete sucessfully'})
+        }
+        res.status(200).json({sucess:true,contacts})
+       }
+
+        catch(error)
+    {
+        res.status(500).json({success:false, message:'Server Error', error: error.message});
+    }
+    }
+  export const updateContactById = async(req,res)=>{
+        try{
+            const {id}=req.params;
+            const contacts=await Contact.findByIdAndUpdate(id, req.body, {new:true});
+            if(!contacts){
+                return res.status(404).json({sucess:false,contacts, message:'Contact not found'})
+            }
+            res.status(200).json({sucess:true,contacts})
+        }
+        catch(error)
+        {
+            res.status(500).json({success:false, message:'Server Error', error: error.message});
+        }
+    }
+
+
+    
