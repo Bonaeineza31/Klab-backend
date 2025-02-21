@@ -1,9 +1,15 @@
 import Contact from "../models/contactModal.js";
 
-export const CreateContact = async(requestAnimationFrame, res)=>{
+export const CreateContact = async(req, res)=>{
     try{
-        const{names, email, subject, message, phone, status} = requestAnimationFrame.body;
-        const newContact = new Contact({names, email, subject, message, phone, status});
+        const{
+        email,
+        subject,
+        message,
+        phone,
+        status
+        }=req.body;
+        const newContact = new Contact({email, subject, message, phone, status});
 
         await newContact.save();
 
@@ -13,5 +19,5 @@ export const CreateContact = async(requestAnimationFrame, res)=>{
     catch(error){
         res.status(500).json({success:false, message:'Server Error', error: error.message});
 
-    }
+}
 }

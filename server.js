@@ -13,21 +13,12 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-// app.use(bodyParser,json());
+app.use(bodyParser.json());
 app.use('/', mainRouter);
+app.use(express.json());
 
 const dbUri = `mongodb+srv://${db_user}:${encodeURIComponent(db_pass)}@cluster0.qfmve.mongodb.net/${db_name}?retryWrites=true&w=majority&appName=Cluster0`
-
 mongoose.set("strictQuery", false);
-
-app.get('/', (req, res) => {
-    res.send("this is my first project of node.js");
-});
-
-app.post('/postrequest', (req, res) => {
-    res.send("Got a Post request");
-});
-
 mongoose
     .connect(dbUri, {
         useNewUrlParser: true,
@@ -40,7 +31,3 @@ mongoose
             console.log(`Server is running on port http://localhost:${PORT}`);
         });
     })
-    .catch((error) => {
-        console.log("MongoDB connection error:", error.message);
-        process.exit(1);
-    });

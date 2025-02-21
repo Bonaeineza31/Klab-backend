@@ -5,9 +5,8 @@ const contactSchema = new Schema(
     {
         names:{
             type: String, 
-            required: true
+            required: false
         },
-
         email:{
             type: String, 
             required: true
