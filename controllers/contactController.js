@@ -40,7 +40,7 @@ export const getContactById=async(req,res)=>{
         const {id}=req.params;
         const contacts=await Contact.findById(id)
     if(!contacts){
-        res.status(404).json({sucess:false,contacts,essage:'Contact not found'})
+        res.status(404).json({sucess:false,contacts,message:'Contact not found'})
     }
     res.status(200).json({sucess:true,contacts})
        }
@@ -70,6 +70,7 @@ export const deleteContactById =async(req,res)=>{
         res.status(500).json({success:false, message:'Server Error', error: error.message});
     }
     }
+
   export const updateContactById = async(req,res)=>{
         try{
             const {id}=req.params;
