@@ -18,13 +18,14 @@ const userSchema = new Schema(
     },
     userRole: {
       type: String,
-      required: true,
+      required: false,
       default: "user",
       enum: ["user", "admin"]
     },
     tokens: {
       accessToken: {
         type: String,
+        default: ""
       }
     }
   }

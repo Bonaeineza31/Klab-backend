@@ -9,7 +9,7 @@ export const Register =async (req,res) =>{
 
     try{
         const{
-            userName,userEmail,userPassword,UserRole} =req.body 
+            userName,userEmail,userPassword,userRole} =req.body 
 
         const existingUser = await User.findOne({userEmail});
         if(existingUser){
@@ -18,9 +18,9 @@ export const Register =async (req,res) =>{
        const hashedPassword = await bcrypt.hash(userPassword,10);
 
        const user = new User({
-        userName,userEmail,userPassword:hashedPassword,UserRole
+        userName,userEmail,userPassword:hashedPassword,userRole
        });
-       user.tokens.acessToken=generateAccessToken(user);
+       user.tokens.accessToken=generateAccessToken(user);
        await user.save();
        res.status(201).json({
         message:"Account created Successfully!",
@@ -67,6 +67,6 @@ export const Login = async (req, res) => {
       res.json({ user: userResponse });
     } catch (error) {
       // General error handling
-      res.status(500).json({ message: "Server error", error: error.message });
+      res.status(500).json({ message: "Server error", error: error.message});
 }
 };
