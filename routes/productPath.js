@@ -1,4 +1,6 @@
 import express from 'express';
+
+
 import { 
   createProduct, 
   getAllProducts, 
@@ -14,7 +16,7 @@ productRouter.post('/', upload.single('productImage'), createProduct);
 
 productRouter.get('/', getAllProducts);
 
-productRouter.get('/:id', getProductById);
+productRouter.get('/:id',  getProductById);
 
 productRouter.put('/:id', upload.single('productImage'), updateProductById);
 
