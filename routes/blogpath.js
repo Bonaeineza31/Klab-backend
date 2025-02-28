@@ -1,31 +1,13 @@
+import { createBlog,getAllblog,getBlogById,deleteBlogById} from "../controllers/blogcontroller.js";
+import configureMulter from "../utils/multer.js";
+import express from 'express';
 
-import mongoose from "mongoose";
+const blogRouter=express();
 
-const{model,Schema} = mongoose;
+const upload = configureMulter();
 
-const blogSchema=new Schema(
-    {
-     Title:{
-        type:String,
-        required:true
-     },
-     Description:{
-        type:String,
-        required:true
-     },
-     Date:{
-        type:String,
-        required:true
-     },
-     images:{
-        type:Array,
-        required:false
-     }
-    },
-    {
-timestamps:true
-    },
-)
-
-const blog=model("blog" ,blogSchema)
-export default blog;
+blogRouter.post("/createBlog",upload,createBlog);
+blogRouter.get("/getAllblog",getAllblog);
+blogRouter.get("/getBlogById/:id",getBlogById);
+blogRouter.delete("/deleteBlogById/:id",deleteBlogById)
+export default blogRouter;
